@@ -1,50 +1,114 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="styles.css">
-
-    <title>Projeto</title>
-</head>
-
-<body>
-     <!-- Cabeçalho de informações do sistema -->
-    <header>
-        <div class="title">
-            <h2>Lista de Compras</h2>
-        </div>
-        <div class="banner">
-            <img src="https://images.contentstack.io/v3/assets/blt45c082eaf9747747/bltbcca43584b660977/5de0b6aa703bd50385f981ad/Header-5.jpg?width=1200&height=630&fit=crop"
-                alt="y">
-        </div>
-    </header>
-
-     <!-- Opções para adicionar um novo item -->
-    <section class="newItem">
-        <input type="text" id="newInput" placeholder="Adicionar novo item:">
-        <input type="text" id="newQuantity" placeholder="Quantidade:">
-        <input type="text" id="newPrice" placeholder="Valor:">
-        <span onclick="newItem()" class="addBtn">Adicionar</span>
-    </section>
-
-    <!-- Tabela com items existentes -->
-    <section class="items">
-        <table id="myTable">
-            <tr>
-                <th>Nome</th>
-                <th>Quantidade</th>
-                <th>Valor</th>
-                <th><img src="https://cdn-icons-png.flaticon.com/512/126/126468.png" width="15px" height="15px"></th>
-            </tr>
-        </table>
-    </section>
-
-    <script src="scripts.js"></script>
-</body>
-
-</html>
-
-
+const getList = async () => {
+    let url = 'http://127.0.0.1:5000/produtos';
+    fetch(url, {
+      method: 'get',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        data.produtos.forEach(item => insertList(item.nome, item.ano, item.valor))
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+  
+  
+  getList()
+  
+  
+  
+  const postItem = async (inputProduct, inputAno, inputPrice) => {
+    const formData = new FormData();
+    formData.append('nome', inputProduct);
+    formData.append('Ano', inputAno);
+    formData.append('valor', inputPrice);
+  
+    let url = 'http://127.0.0.1:5000/produto';
+    fetch(url, {
+      method: 'post',
+      body: formData
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+  
+  
+  
+  const insertButton = (parent) => {
+    let span = document.createElement("span");
+    let txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    parent.appendChild(span);
+  }
+  
+  
+ 
+  const removeElement = () => {
+    let close = document.getElementsByClassName("close");
+    // var table = document.getElementById('myTable');
+    let i;
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function () {
+        let div = this.parentElement.parentElement;
+        const nomeItem = div.getElementsByTagName('td')[0].innerHTML
+        if (confirm("Você tem certeza?")) {
+          div.remove()
+          deleteItem(nomeItem)
+          alert("Removido!")
+        }
+      }
+    }
+  }
+  
+  
+  const deleteItem = (item) => {
+    console.log(item)
+    let url = 'http://127.0.0.1:5000/produto?nome=' + item;
+    fetch(url, {
+      method: 'delete'
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+  
+  
+  const newItem = () => {
+    let inputProduct = document.getElementById("newInput").value;
+    let inputAno = document.getElementById("newAno").value;
+    let inputPrice = document.getElementById("newPrice").value;
+  
+    if (inputProduct === '') {
+      alert("Escreva o nome de um item!");
+    } else if (isNaN(inputAno) || isNaN(inputPrice)) {
+      alert("Quantidade e valor precisam ser números!");
+    } else {
+      insertList(inputProduct, inputAno, inputPrice)
+      postItem(inputProduct, inputAno, inputPrice)
+      alert("Item adicionado!")
+    }
+  }
+  
+  
+  
+  const insertList = (nameProduct, Ano, price) => {
+    var item = [nameProduct, Ano, price]
+    var table = document.getElementById('myTable');
+    var row = table.insertRow();
+  
+    for (var i = 0; i < item.length; i++) {
+      var cel = row.insertCell(i);
+      cel.textContent = item[i];
+    }
+    insertButton(row.insertCell(-1))
+    document.getElementById("newInput").value = "";
+    document.getElementById("newAno").value = "";
+    document.getElementById("newPrice").value = "";
+  
+    removeElement()
+  }
