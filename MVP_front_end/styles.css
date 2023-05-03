@@ -5,11 +5,11 @@ li {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: rgb(225, 222, 199);
+    background-color: rgb(250, 249, 244);
 }
 
 header {
-    background-color: rgb(225, 222, 199);
+    background-color: rgb(129, 116, 13);
     text-align: center;
     position: relative;
     width: 100%;
@@ -18,15 +18,16 @@ header {
 .title {
     color: white;
     width: 100%;
-    background-color: rgb(35, 32, 24);
+    background-color: rgb(7, 7, 7);
     display: inline-block;
     padding: 2px 0px;
     position: sticky;
     top: 0px;
+    border-radius: 20px;
 }
 
 .banner {
-    height: 300px;
+    height: 400px;
     overflow: hidden;
 }
 
@@ -41,12 +42,14 @@ header {
     color: white;
     display: flex;
     justify-content: center;
+    border-radius: 30px;
 }
 
 .newItem:after {
     content: "";
     display: table;
     clear: both;
+    border-radius: 30px;
 }
 
 #newInput {
@@ -55,14 +58,16 @@ header {
     width: 25%;
     padding: 10px;
     font-size: 16px;
+    border-radius: 30px;
 }
 
-#newQuantity {
+#newAno {
     margin: 0;
     border: 1px solid rgb(35, 32, 24);
     width: 8%;
     padding: 10px;
     font-size: 16px;
+    border-radius: 30px;
 }
 
 #newPrice {
@@ -71,23 +76,25 @@ header {
     width: 5%;
     padding: 10px;
     font-size: 16px;
+    border-radius: 30px;
 }
 
 
 .addBtn {
     padding: 9px 10px;
-    background-color: rgb(35, 32, 24);
+    background-color: rgb(7, 7, 7);
     color: white;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
     border-radius: 2px;
+    border-radius: 30px;
 }
 
 .addBtn:hover {
-    background-color: #2ab53a;
-    color: white;
+    background-color: #ecf019;
+    color: rgb(0, 0, 0);
 }
 
 .items {
@@ -105,7 +112,7 @@ header {
 table,
 th,
 td {
-    border: 1px solid black;
+    border: 1px solid rgb(248, 242, 242);
     border-collapse: collapse;
     cursor: pointer;
     position: relative;
@@ -113,15 +120,19 @@ td {
     font-size: 18px;
     transition: 0.2s;
     text-align: start;
+    border-radius: 30px;
+    
 }
 
 table{
-    background-color: white;
+    background-color: rgb(255, 251, 251);
     width: 50%;
+    border-radius: 30px;
 }
 
 tr:nth-child(odd){
-    background-color: #eee;
+    background-color: #98e2b7;
+   
 }
 
 th:nth-child(1){
@@ -129,6 +140,6 @@ th:nth-child(1){
 }
 
 tr:hover {
-    background: rgb(200, 199, 199);
+    background: rgb(226, 205, 10);
 }
 
