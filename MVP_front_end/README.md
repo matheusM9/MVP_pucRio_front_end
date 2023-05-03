@@ -1,10 +1,6 @@
 # Meu Front
+**Disciplina de Desenvolvimento Full Stack Básico**
 
-Este pequeno projeto faz parte do material diático da Disciplina **Desenvolvimento Full Stack Básico** 
-
-O objetivo aqui é ilutsrar o conteúdo apresentado na terceira aula.
-
+Nesse arquivo esta todo o front end desenvolvido, o bjetivo deste projeto é ajudar em controle de estoque, no caso em ula loja de carros, a principio a idetificaçao sera feita pela marca/modelo, ano do veículo e preço, porteriormente podera ser acrescentada outros tipo de identificação.
 ---
-## Como executar
 
-Basta fazer o download do projeto e abrir o arquivo index.html no seu browser.
